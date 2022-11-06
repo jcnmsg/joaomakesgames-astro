@@ -1,0 +1,127 @@
+---
+export interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+const black = "#1C1C1C";
+const white = "#F2F2F2";
+---
+
+<!DOCTYPE html>
+<html lang="EN">
+  <head>
+    <script>
+      const html = document.getElementsByTagName("html")[0];
+      const userPreference = localStorage.getItem("joaomakesgames.colorMode");
+      document.body.style.transition = "none";
+      html.className = userPreference && userPreference === "light" ? "" : "dark";
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content="João, a Portuguese software developer who enjoys making games." />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;800&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
+
+    <style is:global define:vars={{ white, black }}>
+      * {
+        font-family: "Poppins", sans-serif;
+      }
+
+      html:not(.dark) nav[stuck] {
+        background-color: var(--white);
+      }
+
+      html.dark nav[stuck] {
+        background-color: var(--black);
+      }
+
+      html,
+      body {
+        scroll-behavior: smooth;
+      }
+
+      ul {
+        list-style-type: disc !important;
+        margin: revert !important;
+        padding: revert !important;
+      }
+
+      .article-body .article-content img {
+        width: 100%;
+        border-radius: 0.25rem;
+        overflow: hidden;
+        margin: 2rem 0;
+      }
+
+      .article-body p em {
+        font-family: "PT Serif", serif;
+        font-size: 1rem;
+        position: absolute;
+        left: -13rem;
+        width: 12rem;
+        bottom: 0;
+        text-align: right;
+      }
+
+      .article-body .gallery img {
+        border-radius: 0.25rem;
+        overflow: hidden;
+        width: 100%;
+        margin-bottom: 1rem;
+        cursor: pointer;
+      }
+
+      .article-body p,
+      .article-body li,
+      .article-body a {
+        font-family: "PT Serif", serif;
+        font-size: 1.2rem;
+        position: relative;
+      }
+
+      .article-body h2,
+      .article-body h3 {
+        font-family: "PT Serif";
+        font-weight: bold;
+        margin: 1rem 0;
+      }
+
+      .article-body h2 {
+        font-size: 1.5rem;
+      }
+
+      .article-body a {
+        font-weight: bold;
+        text-decoration: underline;
+      }
+
+      .article-body a:hover {
+        color: #8758ff;
+      }
+
+      .article-body p {
+        margin-bottom: 1rem;
+      }
+    </style>
+  </head>
+
+  <body class="dark:text-white text-black dark:bg-black bg-white transition-all duration-75 delay-0 ease-in-out">
+    <div class="max-w-[1080px] mx-auto pb-16">
+      <slot />
+    </div>
+
+    <script defer>
+      Array.from(document.querySelectorAll("a"))
+        .filter((link) => link.hostname != window.location.hostname)
+        .forEach((link) => (link.target = "_blank"));
+
+      const observer = new IntersectionObserver(([e]) => e.target.toggleAttribute("stuck", e.intersectionRatio < 1), { threshold: [1] });
+      observer.observe(document.querySelector("nav"));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,33 @@
+---
+import Game from "./Game.astro";
+import Blog from "./Blog.astro";
+
+export interface Props {
+  id: string;
+  title: string;
+  type: string;
+  items: MD[];
+}
+
+const { id, title, type, items } = Astro.props;
+const href = `/${type}`;
+---
+
+<section id={id} class="flex justify-between items-start flex-col mx-auto px-8 md:px-14 lg:px-24 w-full pt-8">
+  <a aria-label={title} href={href} class="flex items-start justify-between w-full hover:text-primary">
+    <h2 class="font-bold text-3xl lg:text-4xl text-left !leading-snug mb-8 underline">
+      {title}
+    </h2>
+    <p class="font-bold text-3xl">+</p>
+  </a>
+  <div class="max-w-screen-xl flex items-start justify-start w-[calc(100%+1rem)] flex-wrap -ml-2">
+    {
+      items
+        .sort((a, b) => (type === "games" ? parseInt(b.frontmatter.date) - parseInt(a.frontmatter.date) : new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime()))
+        .map((g) => {
+          if (type === "games") return <Game name={g.frontmatter.name} platform={g.frontmatter.platform} date={g.frontmatter.date} img={g.frontmatter.img} type={g.frontmatter.type} url={g.url} />;
+          else if (type === "blog") return <Blog title={g.frontmatter.title} date={g.frontmatter.date} img={g.frontmatter.img} tags={g.frontmatter.tags} url={g.url} />;
+        })
+    }
+  </div>
+</section>

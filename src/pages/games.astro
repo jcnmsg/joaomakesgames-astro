@@ -1,0 +1,14 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Navigation from "../components/Navigation.astro";
+import Section from "../components/home/Section.astro";
+
+const games = await Astro.glob("./games/*.md");
+---
+
+<Layout title="joaomakesgames">
+  <Header />
+  <Navigation />
+  <Section title="games" id="games" items={games} type="games" />
+</Layout>

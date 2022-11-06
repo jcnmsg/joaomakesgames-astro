@@ -1,0 +1,20 @@
+---
+export interface Props {
+  title: string;
+  date: string;
+  img: string;
+  tags: string;
+  url: string;
+}
+
+const { title, date, img, tags, url } = Astro.props;
+---
+
+<div class="flex flex-row w-full mb-4 cursor-pointer p-2">
+  <div class="my-2 w-full sm:w-2/3 flex flex-col items-start justify-center">
+    <a aria-label={title} href={url}>
+      <h2 class="text-xl font-bold hover:text-primary">{title}</h2>
+      <p class="text-sm mt-2 text-mid">{date} | <span class="text-mid">{tags}</span></p>
+    </a>
+  </div>
+</div>

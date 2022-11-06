@@ -1,0 +1,18 @@
+---
+import ColorMode from "./ColorMode.astro";
+
+const pathname = Astro.url.pathname;
+const unselected = "hover:text-primary";
+const selected = "text-primary";
+---
+
+<nav class="py-6 sticky top-[-2px] z-max transition-all duration-75 delay-0 ease-in-out">
+  <div class="flex justify-between items-center mx-auto px-8 md:px-14 lg:px-24 w-full">
+    <div class="flex space-x-4 items-center font-bold dark:text-white text-black transition-all duration-75 ease-in-out relative w-full">
+      <a aria-label="home" href="/" class={pathname === "/" ? selected : unselected}>home</a>
+      <a aria-label="games" href="/games" class={pathname.includes("/games") ? selected : unselected}>games</a>
+      <a aria-label="blog" href="/blog" class={pathname.includes("/blog") ? selected : unselected}>blog</a>
+      <ColorMode />
+    </div>
+  </div>
+</nav>

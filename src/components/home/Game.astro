@@ -1,0 +1,25 @@
+---
+export interface Props {
+  name: string;
+  platform: string;
+  date: string;
+  img: string;
+  type: string;
+  url: string;
+}
+
+const { name, platform, date, img, type, url } = Astro.props;
+---
+
+<div class="flex items-start justify-center flex-col p-2 cursor-pointer w-full sm:w-1/2 lg:w-1/3">
+  <div class="rounded overflow-hidden w-full relative">
+    {type === "jam" && <div class="rounded-full font-bold bg-primary text-white text-xs px-2 absolute right-2 top-2 z-10">JAM GAME</div>}
+    <a aria-label={name} href={url}><img alt={name} src={img} class="hover:grayscale-0 grayscale w-full h-[140px] object-cover hover:scale-105 ease-in transition-all duration-75" /></a>
+  </div>
+  <div class="my-4">
+    <a aria-label={name} href={url}><h2 class="text-xl font-bold hover:text-primary pr-2">{name}</h2></a>
+    <p class="text-sm text-mid">
+      {date} | <span class="text-mid">{platform}</span>
+    </p>
+  </div>
+</div>

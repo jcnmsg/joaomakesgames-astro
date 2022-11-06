@@ -1,0 +1,30 @@
+<span id="moon" class="absolute right-[-2px] cursor-pointer hover:text-primary"></span>
+
+<script defer>
+  const mode = document.getElementById("moon");
+  const html = document.getElementsByTagName("html")[0];
+  const userPreference = localStorage.getItem("joaomakesgames.colorMode");
+
+  if (mode && html) {
+    if (userPreference && userPreference === "light") {
+      mode.innerHTML = "🌙";
+    } else {
+      mode.innerHTML = "☀️";
+    }
+
+    mode.addEventListener("click", toggle);
+  }
+
+  function toggle() {
+    document.body.style.transition = "all 75ms ease-in-out 0s";
+    if (html.classList.contains("dark")) {
+      mode.innerHTML = "🌙";
+      html.classList.remove("dark");
+      localStorage.setItem("joaomakesgames.colorMode", "light");
+    } else {
+      mode.innerHTML = "☀️";
+      html.classList.add("dark");
+      localStorage.setItem("joaomakesgames.colorMode", "dark");
+    }
+  }
+</script>

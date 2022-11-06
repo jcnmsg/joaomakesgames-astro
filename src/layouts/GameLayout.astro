@@ -1,0 +1,26 @@
+---
+import Layout from "./Layout.astro";
+import Header from "../components/Header.astro";
+import Navigation from "../components/Navigation.astro";
+
+const { frontmatter } = Astro.props;
+---
+
+<Layout title="joaomakesgames">
+  <Header name="João" />
+  <Navigation />
+  <section class="article-body flex justify-between items-start flex-col mx-auto px-8 md:px-14 lg:px-24 w-full pt-8">
+    <div class="max-w-screen-xl flex items-start justify-start w-full flex-wrap">
+      <div class="gallery w-2/6 pr-8">
+        <img alt={frontmatter.name} src={frontmatter.img} />
+      </div>
+      <div class="article-content w-4/6">
+        <h1 class="font-bold text-3xl lg:text-4xl text-left !leading-snug">
+          {frontmatter.name}
+        </h1>
+        <h2 class="!mt-0 !mb-8 text-mid !text-lg text-mid !font-poppins !font-normal">{frontmatter.platform} | Released on {frontmatter.release}</h2>
+        <slot />
+      </div>
+    </div>
+  </section>
+</Layout>

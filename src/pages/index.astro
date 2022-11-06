@@ -1,0 +1,17 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Navigation from "../components/Navigation.astro";
+import Section from "../components/home/Section.astro";
+
+const games = await Astro.glob("./games/*.md");
+const posts = await Astro.glob("./blog/*.md");
+const recentPosts = posts.slice(0, 5);
+---
+
+<Layout title="joaomakesgames">
+  <Header />
+  <Navigation />
+  <Section title="games" id="games" items={games} type="games" />
+  <Section title="blog" id="blog" items={recentPosts} type="blog" />
+</Layout>

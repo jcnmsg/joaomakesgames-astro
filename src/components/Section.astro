@@ -1,0 +1,18 @@
+---
+export interface Props {
+  id: string;
+  title: String;
+  content: String;
+}
+
+const { id, title, content } = Astro.props;
+---
+
+<section id={id} class="flex justify-between items-start flex-col mx-auto px-8 md:px-14 lg:px-24 w-full pt-8">
+  <h2 class="font-bold text-3xl lg:text-4xl text-left !leading-snug mb-8 underline">
+    {title}
+  </h2>
+  <div class="max-w-screen-xl flex items-start justify-start w-full flex-wrap -ml-2 -mr-2">
+    {content}
+  </div>
+</section>
